@@ -7,6 +7,10 @@ This is a work in progess. It will allow you to add custom property maps to you 
 
 Status History
 
+Version 0.0.3:
+
+Upgraded metadata (code location, description, license)
+
 Version 0.0.2:
 
 XML output appears to be working. To create an attribute, mark the key with an '@', such as ['@name': name].
