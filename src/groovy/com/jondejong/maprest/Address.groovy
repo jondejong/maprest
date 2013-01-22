@@ -16,12 +16,12 @@ class Address {
 
     public transformToMap() {
         return [
+                "@type": type,
                 line1: line1,
                 line2: line2,
                 city: city,
                 state: state,
-                zipCode: zipCode,
-                "@type": type
+                zipCode: zipCode
         ]
     }
 }

@@ -1,4 +1,4 @@
-<plugin name='maprest' version='0.0.1' grailsVersion='2.1 &gt; *'>
+<plugin name='maprest' version='0.0.2' grailsVersion='2.2 &gt; *'>
   <author>Jon DeJong</author>
   <title>Maprest Plugin</title>
   <description>Brief summary/description of the plugin.
@@ -10,7 +10,6 @@
   </resources>
   <repositories>
     <repository name='grailsCentral' url='http://grails.org/plugins' />
-    <repository name='http://repo.grails.org/grails/core' url='http://repo.grails.org/grails/core/' />
     <repository name='mavenCentral' url='http://repo1.maven.org/maven2/' />
   </repositories>
   <dependencies />

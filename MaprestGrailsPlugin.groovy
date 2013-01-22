@@ -5,9 +5,9 @@ import org.codehaus.groovy.grails.web.metaclass.RenderDynamicMethod
 class MaprestGrailsPlugin {
 
     // the plugin version
-    def version = "0.0.1"
+    def version = "0.0.2"
     // the version or versions of Grails the plugin is designed for
-    def grailsVersion = "2.1 > *"
+    def grailsVersion = "2.2 > *"
     // the other plugins this plugin depends on
     def dependsOn = [:]
     // resources that are excluded from plugin packaging
@@ -86,24 +86,29 @@ Brief summary/description of the plugin.
         for (entry in map) {
             if (entry.value instanceof Map) {
                 def attributes = [:]
+                def attributeKeys = []
 
-                def thisEntry = (Map)entry.value
+                def element = (Map) entry.value
 
-                thisEntry.keySet().each {String key->
-                    if(key.startsWith('@')) {
+                element.keySet().each { String key ->
+                    if (key.startsWith('@')) {
                         String attribute = key[1..key.size() - 1]
-                        attributes.put(attribute, thisEntry.get(key))
-                        thisEntry.remove(key)
+                        attributes.put(attribute, element.get(key))
+                        attributeKeys.add(key)
                     }
                 }
-
-                builder."${entry.key}" (attributes){
+                attributeKeys.each {
+                    element.remove(it)
+                }
+                builder."${entry.key}"(attributes) {
                     mapAsXml(builder, entry.value)
                 }
 
             } else if (entry.value instanceof Collection) {
                 builder."${entry.key}" {
                     for (childMap in entry.value) {
+                        def attributes = [:]
+                        def attributeKeys = []
                         def elementName
                         if (childMap?.containsKey('elementName')) {
                             elementName = childMap.elementName
@@ -111,7 +116,17 @@ Brief summary/description of the plugin.
                         } else {
                             elementName = "${entry.key[0..-2]}"
                         }
-                        "${elementName}" {
+                        childMap.keySet().each { key ->
+                            if (key.startsWith('@')) {
+                                String attribute = key[1..key.size() - 1]
+                                attributes.put(attribute, childMap.get(key))
+                                attributeKeys.add(key)
+                            }
+                        }
+
+                        attributeKeys.each {childMap.remove(it)}
+
+                        "${elementName}" (attributes){
                             mapAsXml(builder, childMap)
                         }
                     }

@@ -8,6 +8,7 @@ class Person {
 
     public transformToMap() {
         return [
+                "@fullName": "${firstName} ${lastName}",
                 firstName: firstName,
                 lastName: lastName,
                 age: age
