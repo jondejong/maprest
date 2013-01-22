@@ -5,7 +5,7 @@ import org.codehaus.groovy.grails.web.metaclass.RenderDynamicMethod
 class MaprestGrailsPlugin {
 
     // the plugin version
-    def version = "0.0.2"
+    def version = "0.0.3"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "2.2 > *"
     // the other plugins this plugin depends on
@@ -22,16 +22,16 @@ class MaprestGrailsPlugin {
     def author = "Jon DeJong"
     def authorEmail = ""
     def description = '''\
-Brief summary/description of the plugin.
+Allows customization of REST responses using property maps.
 '''
 
     // URL to the plugin's documentation
-    def documentation = "http://grails.org/plugin/maprest"
+    def documentation = "https://github.com/jondejong/maprest"
 
     // Extra (optional) plugin metadata
 
     // License: one of 'APACHE', 'GPL2', 'GPL3'
-//    def license = "APACHE"
+    def license = "APACHE"
 
     // Details of company behind the plugin (if there is one)
 //    def organization = [ name: "My Company", url: "http://www.my-company.com/" ]
@@ -43,7 +43,7 @@ Brief summary/description of the plugin.
 //    def issueManagement = [ system: "JIRA", url: "http://jira.grails.org/browse/GPMYPLUGIN" ]
 
     // Online location of the plugin's browseable source code.
-//    def scm = [ url: "http://svn.codehaus.org/grails-plugins/" ]
+    def scm = [ url: "https://github.com/jondejong/maprest" ]
 
     def doWithDynamicMethods = { ctx ->
         for (controllerClass in application.controllerClasses) {
