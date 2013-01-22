@@ -5,7 +5,13 @@ A Grails plugin allowing you to easily customize REST output
 
 This is a work in progess. It will allow you to add custom property maps to you object model to define how a REST service should respond.
 
-Status
+Status History
+
+Version 0.0.2:
+XML output appears to be working. To create an attribute, mark the key with an '@', such as ['@name': name].
+
+Upgraded to Grails version 2.2
+
 
 Version 0.0.1:
 
