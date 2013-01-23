@@ -7,6 +7,10 @@ This is a work in progess. It will allow you to add custom property maps to you 
 
 Status History
 
+Version 0.0.4:
+
+JSON rendering works. This version should be tested and, with documentation, eligible to be version 0.1.0
+
 Version 0.0.3:
 
 Upgraded metadata (code location, description, license)

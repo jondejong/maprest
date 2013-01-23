@@ -1,11 +1,12 @@
 import com.jondejong.maprest.MaprestFormat
 import grails.converters.JSON
+import org.codehaus.groovy.grails.plugins.web.api.ControllersApi
 import org.codehaus.groovy.grails.web.metaclass.RenderDynamicMethod
 
 class MaprestGrailsPlugin {
 
     // the plugin version
-    def version = "0.0.3"
+    def version = "0.0.4"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "2.2 > *"
     // the other plugins this plugin depends on
@@ -43,30 +44,27 @@ Allows customization of REST responses using property maps.
 //    def issueManagement = [ system: "JIRA", url: "http://jira.grails.org/browse/GPMYPLUGIN" ]
 
     // Online location of the plugin's browseable source code.
-    def scm = [ url: "https://github.com/jondejong/maprest" ]
+    def scm = [url: "https://github.com/jondejong/maprest"]
 
     def doWithDynamicMethods = { ctx ->
         for (controllerClass in application.controllerClasses) {
             controllerClass.metaClass.getXmlFormat = { MaprestFormat.Format.XML }
             controllerClass.metaClass.getJsonFormat = { MaprestFormat.Format.JSON }
             controllerClass.metaClass.getClientAcceptedFormat = { MaprestFormat.Format.CLIENT_ACCEPTED }
-            controllerClass.metaClass.renderMaprest = { Object o, String root, MaprestFormat.Format f ->
+            controllerClass.metaClass.renderMaprest = { Object o, MaprestFormat.Format f, String root=null ->
 
                 def map = o.transformToMap()
 
                 if (f == MaprestFormat.Format.XML) {
+                    if (!root) {
+                        root = 'root'
+                    }
                     renderXml(map, root)
                 } else if (f == MaprestFormat.Format.JSON) {
-                    render map as JSON
-                } else {
-                    withFormat {
-                        json {
-                            render map as JSON
-                        }
-                        xml {
-                            renderXml(map, root)
-                        }
+                    if (root) {
+                        map = ["${root}": map]
                     }
+                    renderJson map
                 }
             }
         }
@@ -80,6 +78,40 @@ Allows customization of REST responses using property maps.
                 mapAsXml(delegate, map)
             }
         })
+    }
+
+    def renderJson(map) {
+        def scrubbedMap = scrubObjectForJson(map)
+        def renderDynamicMethod = new RenderDynamicMethod()
+//        renderDynamicMethod.invoke(this, "render", [contentType: "application/json"], map);
+
+        def api = new ControllersApi()
+        api.render(this, scrubbedMap as JSON)
+    }
+
+
+    def scrubObjectForJson(map) {
+        def newMap = [:]
+        if (map instanceof Collection) {
+            def newCollection = []
+            map.each {
+                newCollection.add scrubObjectForJson(it)
+            }
+            return newCollection
+        } else {
+            map.keySet().each {
+                def val = map.get it
+                def key = it
+                if (it.toString().startsWith('@')) {
+                    key = key[1..key.size() - 1]
+                }
+                if (val instanceof Map || val instanceof Collection) {
+                    val = scrubObjectForJson(val)
+                }
+                newMap.put(key, val)
+            }
+        }
+        return newMap
     }
 
     protected mapAsXml(builder, map) {
@@ -124,9 +156,9 @@ Allows customization of REST responses using property maps.
                             }
                         }
 
-                        attributeKeys.each {childMap.remove(it)}
+                        attributeKeys.each { childMap.remove(it) }
 
-                        "${elementName}" (attributes){
+                        "${elementName}"(attributes) {
                             mapAsXml(builder, childMap)
                         }
                     }
