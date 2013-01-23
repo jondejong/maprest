@@ -1,7 +1,7 @@
 maprest
 =======
 
-A Grails plugin allowing you to easily customize REST output 
+A Grails plugin allowing you to easily customize dynamic REST output
 
 This is a work in progess. It will allow you to add custom property maps to you object model to define how a REST service should respond.
 
