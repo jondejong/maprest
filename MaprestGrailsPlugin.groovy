@@ -6,7 +6,7 @@ import org.codehaus.groovy.grails.web.metaclass.RenderDynamicMethod
 class MaprestGrailsPlugin {
 
     // the plugin version
-    def version = "0.0.4"
+    def version = "0.0.5"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "2.2 > *"
     // the other plugins this plugin depends on
@@ -50,7 +50,6 @@ Allows customization of REST responses using property maps.
         for (controllerClass in application.controllerClasses) {
             controllerClass.metaClass.getXmlFormat = { MaprestFormat.Format.XML }
             controllerClass.metaClass.getJsonFormat = { MaprestFormat.Format.JSON }
-            controllerClass.metaClass.getClientAcceptedFormat = { MaprestFormat.Format.CLIENT_ACCEPTED }
             controllerClass.metaClass.renderMaprest = { Object o, MaprestFormat.Format f, String root=null ->
 
                 def map = o.transformToMap()

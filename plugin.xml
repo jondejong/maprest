@@ -1,13 +1,11 @@
-<plugin name='maprest' version='0.0.4' grailsVersion='2.2 &gt; *'>
+<plugin name='maprest' version='0.0.5' grailsVersion='2.2 &gt; *'>
   <author>Jon DeJong</author>
   <title>Maprest Plugin</title>
   <description>Allows customization of REST responses using property maps.
 </description>
   <documentation>https://github.com/jondejong/maprest</documentation>
   <type>MaprestGrailsPlugin</type>
-  <resources>
-    <resource>maprest.MaprestController</resource>
-  </resources>
+  <resources />
   <repositories>
     <repository name='grailsCentral' url='http://grails.org/plugins' />
     <repository name='mavenCentral' url='http://repo1.maven.org/maven2/' />

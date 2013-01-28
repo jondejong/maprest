@@ -10,6 +10,6 @@ package com.jondejong.maprest
 class MaprestFormat {
 
     enum Format {
-        XML, JSON, CLIENT_ACCEPTED
+        XML, JSON
     }
 }
