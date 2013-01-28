@@ -6,7 +6,7 @@ import org.codehaus.groovy.grails.web.metaclass.RenderDynamicMethod
 class MaprestGrailsPlugin {
 
     // the plugin version
-    def version = "0.0.5"
+    def version = "0.0.6"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "2.2 > *"
     // the other plugins this plugin depends on
@@ -17,6 +17,7 @@ class MaprestGrailsPlugin {
     ]
 
     def loadAfter = ['controllers']
+    def observe = ["controllers"]
 
     // TODO Fill in these fields
     def title = "Maprest Plugin" // Headline display name of the plugin
@@ -46,11 +47,21 @@ Allows customization of REST responses using property maps.
     // Online location of the plugin's browseable source code.
     def scm = [url: "https://github.com/jondejong/maprest"]
 
+//    def watchedResources = 'file:./grails-app/controllers'
+
     def doWithDynamicMethods = { ctx ->
+        addMethodsToControllers(application)
+    }
+
+    def onChange = { event ->
+        addMethodsToControllers(application)
+    }
+
+    def addMethodsToControllers(application) {
         for (controllerClass in application.controllerClasses) {
             controllerClass.metaClass.getXmlFormat = { MaprestFormat.Format.XML }
             controllerClass.metaClass.getJsonFormat = { MaprestFormat.Format.JSON }
-            controllerClass.metaClass.renderMaprest = { Object o, MaprestFormat.Format f, String root=null ->
+            controllerClass.metaClass.renderMaprest = { Object o, MaprestFormat.Format f, String root = null ->
 
                 def map = o.transformToMap()
 
@@ -169,12 +180,6 @@ Allows customization of REST responses using property maps.
 
     def doWithApplicationContext = { applicationContext ->
         // TODO Implement post initialization spring config (optional)
-    }
-
-    def onChange = { event ->
-        // TODO Implement code that is executed when any artefact that this plugin is
-        // watching is modified and reloaded. The event contains: event.source,
-        // event.application, event.manager, event.ctx, and event.plugin.
     }
 
     def onConfigChange = { event ->

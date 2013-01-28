@@ -7,6 +7,10 @@ This will allow you to add custom property maps to you object model to define ho
 
 Status History
 
+Version 0.0.6
+
+Readding dynamic methods to the controllers when a controller is recompiled.
+
 Version 0.0.5
 
 Removing demo code to separate project.

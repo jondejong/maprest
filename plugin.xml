@@ -1,4 +1,4 @@
-<plugin name='maprest' version='0.0.5' grailsVersion='2.2 &gt; *'>
+<plugin name='maprest' version='0.0.6' grailsVersion='2.2 &gt; *'>
   <author>Jon DeJong</author>
   <title>Maprest Plugin</title>
   <description>Allows customization of REST responses using property maps.
