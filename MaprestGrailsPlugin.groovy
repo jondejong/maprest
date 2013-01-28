@@ -82,7 +82,6 @@ Allows customization of REST responses using property maps.
     def renderJson(map) {
         def scrubbedMap = scrubObjectForJson(map)
         def renderDynamicMethod = new RenderDynamicMethod()
-//        renderDynamicMethod.invoke(this, "render", [contentType: "application/json"], map);
 
         def api = new ControllersApi()
         api.render(this, scrubbedMap as JSON)

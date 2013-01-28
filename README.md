@@ -3,9 +3,13 @@ maprest
 
 A Grails plugin allowing you to easily customize dynamic REST output
 
-This is a work in progess. It will allow you to add custom property maps to you object model to define how a REST service should respond.
+This will allow you to add custom property maps to you object model to define how a REST service should respond.
 
 Status History
+
+Version 0.0.5
+
+Removing demo code to separate project.
 
 Version 0.0.4:
 
