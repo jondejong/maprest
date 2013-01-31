@@ -82,12 +82,29 @@ Allows customization of REST responses using property maps.
 
     def renderXml(map, root) {
         def renderDynamicMethod = new RenderDynamicMethod()
-
+        def rootAttributes = parseRootAttributes(map)
         renderDynamicMethod.invoke(this, "render", [contentType: "application/xml"], {
-            "${root}" {
+            "${root}" (rootAttributes){
                 mapAsXml(delegate, map)
             }
         })
+    }
+
+    def parseRootAttributes(Map map) {
+        def attributes = [:]
+        def attributeKeys = []
+
+        map.keySet().each { String key ->
+            if (key.startsWith('@')) {
+                String attribute = key[1..key.size() - 1]
+                attributes.put(attribute, map.get(key))
+                attributeKeys.add(key)
+            }
+        }
+
+        attributeKeys.each {map.remove(it)}
+
+        return attributes
     }
 
     def renderJson(map) {
