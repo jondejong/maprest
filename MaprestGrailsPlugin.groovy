@@ -6,7 +6,7 @@ import org.codehaus.groovy.grails.web.metaclass.RenderDynamicMethod
 class MaprestGrailsPlugin {
 
     // the plugin version
-    def version = "0.0.6"
+    def version = "0.1.0"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "2.2 > *"
     // the other plugins this plugin depends on
