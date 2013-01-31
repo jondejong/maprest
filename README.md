@@ -7,6 +7,10 @@ This will allow you to add custom property maps to your object model to define h
 
 Status History
 
+Version 0.0.7
+
+Allowing attributes in the root element
+
 Version 0.0.6
 
 Readding dynamic methods to the controllers when a controller is recompiled.
