@@ -7,6 +7,10 @@ This will allow you to add custom property maps to your object model to define h
 
 Status History
 
+Version 0.1.0
+
+No changes. Updating version number for first public release.
+
 Version 0.0.7
 
 Allowing attributes in the root element
