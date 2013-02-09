@@ -10,21 +10,24 @@ class MaprestRenderer {
     protected RenderDynamicMethod renderDynamicMethod = new RenderDynamicMethod()
     protected ControllersApi api = new ControllersApi()
 
-    def renderMaprest(Object o, MaprestFormat.Format f, String root = null) {
+    def renderMaprest(Object o, MaprestFormat f, String root = null) {
 
         Map map = o.transformToMap()
 
-        if (f == MaprestFormat.Format.XML) {
-            if (!root) {
-                root = 'root'
-            }
-            renderXml(map, root)
-        }
-        else if (f == MaprestFormat.Format.JSON) {
-            if (root) {
-                map = ["${root}": map]
-            }
-            renderJson map
+        switch (f) {
+
+            case MaprestFormat.XML:
+                if (!root) {
+                    root = 'root'
+                }
+                renderXml(map, root)
+                break
+
+            case MaprestFormat.JSON:
+                if (root) {
+                    map = ["${root}": map]
+                }
+                renderJson map
         }
     }
 

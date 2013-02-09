@@ -30,9 +30,9 @@ class MaprestGrailsPlugin {
     def addMethodsToControllers(application) {
         MaprestRenderer renderer = new MaprestRenderer()
         for (controllerClass in application.controllerClasses) {
-            controllerClass.metaClass.getXmlFormat = { MaprestFormat.Format.XML }
-            controllerClass.metaClass.getJsonFormat = { MaprestFormat.Format.JSON }
-            controllerClass.metaClass.renderMaprest = { Object o, MaprestFormat.Format f, String root = null ->
+            controllerClass.metaClass.getXmlFormat = { MaprestFormat.XML }
+            controllerClass.metaClass.getJsonFormat = { MaprestFormat.JSON }
+            controllerClass.metaClass.renderMaprest = { Object o, MaprestFormat f, String root = null ->
                 renderer.renderMaprest o, f, root
             }
         }

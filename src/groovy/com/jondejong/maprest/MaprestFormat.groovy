@@ -3,9 +3,7 @@ package com.jondejong.maprest
 /**
  * @author jondejong
  */
-class MaprestFormat {
+enum MaprestFormat {
 
-    enum Format {
-        XML, JSON
-    }
+    XML, JSON
 }
