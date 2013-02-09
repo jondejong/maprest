@@ -8,7 +8,7 @@ import com.jondejong.maprest.MaprestFormat
 class MaprestGrailsPlugin {
 
     def version = "0.1.0"
-    def grailsVersion = "2.2 > *"
+    def grailsVersion = "2.0 > *"
 
     def loadAfter = ['controllers']
     def observe = ["controllers"]
